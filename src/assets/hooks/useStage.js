@@ -26,12 +26,11 @@ export const useStage = (aPlayer, resetPlayer) => {
             }
             //finaly, return the stage completily updated
             return newStage;
-        }
+        };
 
         setStage( prev => updateStage(prev));
 
-
-    }, [aPlayer, resetPlayer])
+    }, [aPlayer, resetPlayer]);
 
     return [stage, setStage];
 }

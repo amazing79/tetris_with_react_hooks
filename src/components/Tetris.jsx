@@ -9,24 +9,26 @@ import { createStage, checkCollision } from '../gameHelpers';
 //import styles components
 import {StyleTetrisWrapper, StyledTetris} from './styles/StyleTetris'
 //custom hooks 
+import { useInterval} from '../assets/hooks/useInterval'
 import { usePlayer} from '../assets/hooks/usePlayer'
 import { useStage } from '../assets/hooks/useStage'
 
 const Tetris = () => {
     
-    const [ gameOver, setGameOver] = useState(false);
     const [ dropTime, setDropTime] = useState(null);
-
-    const [player, updatePlayerPos, resetPlayer] = usePlayer();
+    const [ gameOver, setGameOver] = useState(false);
+    
+    const [player, updatePlayerPos, resetPlayer, rotatePlayer] = usePlayer();
     const [stage, setStage ] = useStage(player, resetPlayer);
 
-    console.log('re render');
+    let speed = 700; 
 
     const startGame = () => {
         //reset and start a new game
         setStage(createStage());
         resetPlayer();
         setGameOver(false);
+        setDropTime(speed);
     }
 
     const movePlayer = dir => {
@@ -49,7 +51,12 @@ const Tetris = () => {
     }
 
     const dropPlayer = () => {
+        setDropTime(null);
         drop();
+    }
+
+    const rotate = () => {
+        rotatePlayer(stage, 1);
     }
     //invoco solo la propiedad del objeto e, sino sin los brackets seria 'e.keyCode'
     const move = ({keyCode}) => {
@@ -66,18 +73,36 @@ const Tetris = () => {
             case 40:
                 dropPlayer(); //pulso abajo, desciende
                 return;
+            case 38:
+                rotate(); //pulso para arriba
+                return;
             default:
                 return;
         }
     }
-    
+
+    const keyUp = ({keyCode}) => {
+        if (gameOver) {return;}
+
+        if ( keyCode === 40) {
+            setDropTime(speed);
+        }
+    }
+
+    //Let's do it with interval 
+    useInterval( () =>{
+        drop()
+        }
+       ,dropTime
+    );
+
     return (
-        <StyleTetrisWrapper role="button" tabIndex="0" onKeyDown={ e => move(e)}>
+        <StyleTetrisWrapper role="button" tabIndex="0" onKeyDown={ e => move(e)} onKeyUp={e => keyUp(e)}>
             <StyledTetris> 
                 <Stage stage = {stage} />
                 <aside>
                     {
-                        gameOver ? (<Display  gameOver={gameOver} text='You Lose, Bitch!' />)
+                        gameOver ? (<Display gameOver={gameOver} text='You Lose, Bitch!' />)
                         :(
                         <div>
                             <Display text='Score' />
