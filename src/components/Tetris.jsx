@@ -12,6 +12,7 @@ import {StyleTetrisWrapper, StyledTetris} from './styles/StyleTetris'
 import { useInterval} from '../assets/hooks/useInterval'
 import { usePlayer} from '../assets/hooks/usePlayer'
 import { useStage } from '../assets/hooks/useStage'
+import { useGameStatus } from '../assets/hooks/useGameStatus'
 
 const Tetris = () => {
     
@@ -19,7 +20,8 @@ const Tetris = () => {
     const [ gameOver, setGameOver] = useState(false);
     
     const [player, updatePlayerPos, resetPlayer, rotatePlayer] = usePlayer();
-    const [stage, setStage ] = useStage(player, resetPlayer);
+    const [stage, setStage, rowsCleared ] = useStage(player, resetPlayer);
+    const [rows, setRows, level, setLevel, score, setScore] = useGameStatus(rowsCleared);
 
     let speed = 700; 
 
@@ -29,6 +31,9 @@ const Tetris = () => {
         resetPlayer();
         setGameOver(false);
         setDropTime(speed);
+        setLevel(0);
+        setRows(0);
+        setScore(0);
     }
 
     const movePlayer = dir => {
@@ -38,6 +43,13 @@ const Tetris = () => {
     }
     
     const drop = () => {
+
+        if (rows > (level + 1) * 15){
+            setLevel(prev => prev + 1);
+            speed = speed / (level + 1) + 200
+            setDropTime(speed)
+        }
+
         if(!checkCollision(player, stage, {newX:0, newY:1} )){
             updatePlayerPos({newX:0, newY:1, collided:false});
         }
@@ -102,12 +114,12 @@ const Tetris = () => {
                 <Stage stage = {stage} />
                 <aside>
                     {
-                        gameOver ? (<Display gameOver={gameOver} text='You Lose, Bitch!' />)
+                        gameOver ? (<Display gameOver={gameOver} text='You Lose, Bicth!' />)
                         :(
                         <div>
-                            <Display text='Score' />
-                            <Display text='Rows' />
-                            <Display text='Level' />
+                            <Display text={`Score: ${score}`} />
+                            <Display text={`Rows ${rows}`} />
+                            <Display text={`Level ${level}`} />
                         </div>
                         )
                     }
