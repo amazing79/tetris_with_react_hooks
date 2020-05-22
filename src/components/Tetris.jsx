@@ -23,7 +23,7 @@ const Tetris = () => {
     const [stage, setStage, rowsCleared ] = useStage(player, resetPlayer);
     const [rows, setRows, level, setLevel, score, setScore] = useGameStatus(rowsCleared);
 
-    let speed = 700; 
+    let speed = 800; 
 
     const startGame = () => {
         //reset and start a new game
@@ -44,10 +44,9 @@ const Tetris = () => {
     
     const drop = () => {
 
-        if (rows > (level + 1) * 15){
+        if (rows > (level + 1) * 5){
             setLevel(prev => prev + 1);
-            speed = speed / (level + 1) + 200
-            setDropTime(speed)
+            setDropTime(speed / (level + 1) + 200)
         }
 
         if(!checkCollision(player, stage, {newX:0, newY:1} )){
@@ -97,7 +96,7 @@ const Tetris = () => {
         if (gameOver) {return;}
 
         if ( keyCode === 40) {
-            setDropTime(speed);
+            setDropTime(speed / (level + 1) + 200);
         }
     }
 
