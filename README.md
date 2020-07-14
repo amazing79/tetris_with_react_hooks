@@ -1,68 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# **React Tetris with Hooks**
 
-## Available Scripts
+Puesta a punto del tutorial visto en Udemy. El proyecto cuenta con un hooks propios más uno provisto por Dan Abramov (para el manejo de intervalos). Si bien sigue los pasos del tutorial, el código está adaptado a mi versión. 
 
-In the project directory, you can run:
+**Que se puede rescatar?**
 
-### `yarn start`
+- El uso de hooks personalizados, los cuales me ayudaron a entender mejor el uso de hooks.
+- El uso de styled-components, librería para estilizar componentes en React. La verdad que no la conocía y me pareció una alternativa a usar tu propios archivos de CSS puro (por decirlo de una manera). Interesante como lo aplica.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Sin necesidad de bajarlo e instalarlo, se puede [ver funcionando aquí](https://tetris-hooks-by-nacho.netlify.app/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Pasos para instalarlo una vez bajado. Correr el siguiente comando:
 
-### `yarn test`
+`npm install`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Luego, ejecutar npm run para verlo en funcionamiento local
 
-### `yarn build`
+`npm run start`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+`yarn start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Respecto a styled-components, en este web webinar se pueden ver algunas buenas prácticas para usarlos: 
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[Charla sobre styled-components](https://www.youtube.com/watch?v=016h2MhbKmU)
